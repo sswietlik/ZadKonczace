@@ -1,0 +1,28 @@
+PHP test
+
+@		"maurel@gmail.com"
+PASS	"Qwerty12345"
+name	"Marek"
+sname	"Aureliusz"
+adres 	"ul.Marszowicka 142 "
+zip		"54-078"
+Miasto	"Wrocław"
+Region    "Wrocławskie"  :)
+Country  "Poland"
+phone	"+48 666 666 666"
+
+bank	    5577 1516 3037 6575
+Expires	     1/2020
+CVC2 	     450 
+
+
+
+z Warszawie do Nowego Jorku w dn. 24.01.2019 - 31.01.2019
+
+
+
+
+//*[@id="flights"]/div/div/form/div/div[2]            - Pasek wyboru danych do lotu
+
+
+
