@@ -44,8 +44,7 @@ public class LogPage
                 .navigate()
                 .to("https://www.phptravels.net/m-flights");
 
-//            //V//UDALO SIE OGARNAC KOPIOWANIE XPATH - PROBLEM TKWIŁ W USTAWIENIACH NARZĘDZI - MUSZĘ SIĘ DOPYTAĆ BARTKA O KONKRETNIE PRZYDATNE NARZĘDZIA I ICH WYWOŁYWANIE BO CZASEM JEST TO
-//            //MOCNO ZAKOPANE W SIECI
+//            //V//UDALO SIE OGARNAC KOPIOWANIE XPATH -
 //            WebElement remMeChBx = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div[1]/form/div[1]/div/div[2]/div/div/div[3]/div/div[3]/label"));
 //            remMeChBx.click();
 //
@@ -111,7 +110,7 @@ public class LogPage
         WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a"));
             fromBTN.click();
             fromBTN.sendKeys("WAW");
-            Thread.sleep(3000);
+            Thread.sleep(2000);
             robot.keyPress(KeyEvent.VK_TAB);
             robot.keyRelease(KeyEvent.VK_TAB);
 
@@ -170,15 +169,15 @@ public class LogPage
         WebElement reserveAsGuest = driver.findElement(By.id("guesttab"));
         reserveAsGuest.click();
 
-        WebElement firstName = driver.findElement(By.name("firstname"));
+        WebElement firstName = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[1]/div[1]/div/input"));
         firstName.sendKeys("Marek");
         firstName.click();
 
-        WebElement lastName = driver.findElement(By.name("lastname"));
+        WebElement lastName = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[1]/div[2]/input"));
         lastName.sendKeys("Aureliusz");
         lastName.click();
 
-        WebElement mailAd = driver.findElement(By.name("email"));
+        WebElement mailAd = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[2]/div[1]/input"));
         mailAd.sendKeys("maurel@gmail.com");
         mailAd.click();
 
@@ -186,24 +185,57 @@ public class LogPage
         mailAdConfirm.sendKeys("maurel@gmail.com");
         mailAdConfirm.click();
 
-        WebElement mobilePhone = driver.findElement(By.name("phone"));
+        WebElement mobilePhone = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[3]/div/input"));
         mobilePhone.sendKeys("+48 666 666 666");
         mobilePhone.click();
 
-        WebElement MyAddressBTN = driver.findElement(By.name("address"));
+        WebElement MyAddressBTN = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[4]/div/input"));
         MyAddressBTN.sendKeys("ul.Blotna nr_zachlapany, Sosnowieś");
         MyAddressBTN.click();
 
-        WebElement MyCountryBTN = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]"));
-        MyAddressBTN.click();
+
+
+//        WebElement MyCountryBTN = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/a"));
+//        MyCountryBTN.click();
         WebElement MyCountryText = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
         MyCountryText.sendKeys("Poland");
-        robot.keyPress(KeyEvent.VK_TAB);
-        robot.keyRelease(KeyEvent.VK_TAB);
+//        robot.keyPress(KeyEvent.VK_TAB);
+//        robot.keyRelease(KeyEvent.VK_TAB);
+ //       ------------------------------------------------------------------------------------------------------------------------------
 
 
+        WebElement firstNameBILL = driver.findElement(By.xpath("//*[@id=\"name\"]"));
+        firstNameBILL.sendKeys("Marek");
+        firstNameBILL.click();
+        
+
+        WebElement lastNameBILL = driver.findElement(By.id("surname"));
+        lastNameBILL.sendKeys("Aureliusz");
+        lastNameBILL.click();
+
+        WebElement mailAdBILL = driver.findElement(By.xpath("//*[@id=\"email\"]"));
+        mailAdBILL.sendKeys("maurel@gmail.com");
+        mailAdBILL.click();
+
+        WebElement mobilePhoneBILL = driver.findElement(By.id("phone[]"));
+        mobilePhoneBILL.sendKeys("+48 666 666 666");
+        mobilePhoneBILL.click();
 
 
+        WebElement dobBILL= driver.findElement(By.id("birthday"));
+        dobBILL.sendKeys("1984-04-01");
+        dobBILL.click();
+
+        WebElement passPort= driver.findElement(By.id("cardno"));
+        passPort.sendKeys("DO9549451");
+        passPort.click();
+
+        WebElement passportExp= driver.findElement(By.id("expiration"));
+        passportExp.sendKeys("2025-01-01");
+        passportExp.click();
+
+        WebElement nationality = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]"));
+        nationality.click();
 
 //        System.out.println("przed przerwaą");
 //        Thread.sleep(2000);
