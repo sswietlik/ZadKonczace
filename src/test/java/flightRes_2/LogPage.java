@@ -104,7 +104,11 @@ public class LogPage
 //            WebElement emptySpace = driver.findElement((By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/div/div[2]/div")));
 //            emptySpace.click();
 //
-            WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a"));
+        WebElement roundFlight = driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[1]/div[1]/div[2]/label"));
+        roundFlight.click();
+
+
+        WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a"));
             fromBTN.click();
             fromBTN.sendKeys("WAW");
             Thread.sleep(3000);
@@ -154,7 +158,52 @@ public class LogPage
 
         WebElement flightSearch = driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[2]/div[4]/button"));
         flightSearch.click();
+
 //------------------------------------------------------------------------------------------------------------------------------//
+
+        WebElement reserveFlight = driver.findElement(By.xpath("//*[@id=\"LIST\"]/li[1]/div/div[1]/div[2]/form[1]/div[2]/div/button"));
+        reserveFlight.click();
+
+//------------------------------------------------------------------------------------------------------------------------------//
+
+
+        WebElement reserveAsGuest = driver.findElement(By.id("guesttab"));
+        reserveAsGuest.click();
+
+        WebElement firstName = driver.findElement(By.name("firstname"));
+        firstName.sendKeys("Marek");
+        firstName.click();
+
+        WebElement lastName = driver.findElement(By.name("lastname"));
+        lastName.sendKeys("Aureliusz");
+        lastName.click();
+
+        WebElement mailAd = driver.findElement(By.name("email"));
+        mailAd.sendKeys("maurel@gmail.com");
+        mailAd.click();
+
+        WebElement mailAdConfirm = driver.findElement(By.name("confirmemail"));
+        mailAdConfirm.sendKeys("maurel@gmail.com");
+        mailAdConfirm.click();
+
+        WebElement mobilePhone = driver.findElement(By.name("phone"));
+        mobilePhone.sendKeys("+48 666 666 666");
+        mobilePhone.click();
+
+        WebElement MyAddressBTN = driver.findElement(By.name("address"));
+        MyAddressBTN.sendKeys("ul.Blotna nr_zachlapany, Sosnowieś");
+        MyAddressBTN.click();
+
+        WebElement MyCountryBTN = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]"));
+        MyAddressBTN.click();
+        WebElement MyCountryText = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
+        MyCountryText.sendKeys("Poland");
+        robot.keyPress(KeyEvent.VK_TAB);
+        robot.keyRelease(KeyEvent.VK_TAB);
+
+
+
+
 
 //        System.out.println("przed przerwaą");
 //        Thread.sleep(2000);
