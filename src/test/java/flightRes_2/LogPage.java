@@ -1,6 +1,7 @@
 package flightRes_2;
 
 import net.bytebuddy.asm.Advice;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.Delayed;
 
 public class LogPage
 {
@@ -38,9 +40,9 @@ public class LogPage
     @Test
     public void accountLogin() throws InterruptedException {
         System.out.println("Start @Test");
-            driver
-                    .navigate()
-                    .to("https://www.phptravels.net/login");
+        driver
+                .navigate()
+                .to("https://www.phptravels.net/m-flights");
 
 //            //V//UDALO SIE OGARNAC KOPIOWANIE XPATH - PROBLEM TKWIŁ W USTAWIENIACH NARZĘDZI - MUSZĘ SIĘ DOPYTAĆ BARTKA O KONKRETNIE PRZYDATNE NARZĘDZIA I ICH WYWOŁYWANIE BO CZASEM JEST TO
 //            //MOCNO ZAKOPANE W SIECI
@@ -94,45 +96,88 @@ public class LogPage
 //            //Problem z kliknięciem w wybrane państwo
 //            //Problem z działaniem przycisku SUBMIT
 
-            WebElement flightsBTN = driver.findElement(By.xpath("//*[@id=\"mobileMenuMain\"]/nav/ul/li[3]/a"));
-            flightsBTN.click();
-        System.out.println("Koniec zmian w arkuszu @Test");
+//            WebElement flightsBTN = driver.findElement(By.xpath("//*[@id=\"mobileMenuMain\"]/nav/ul/li[3]/a"));         //PRZEJŚCIE DO ACCOUNT - WYŁĄCZONE w celu przyspieszenia logowania do strony
+//            flightsBTN.click();
+//        System.out.println("Koniec zmian w arkuszu @Test");
 //------------------------------------------------------------------------------------------------------------------------------//
 //
 //            WebElement emptySpace = driver.findElement((By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/div/div[2]/div")));
 //            emptySpace.click();
 //
-//            WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a/span[1]"));
-//            fromBTN.click();
-//            fromBTN.sendKeys("WAW");
+            WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a"));
+            fromBTN.click();
+            fromBTN.sendKeys("WAW");
+            Thread.sleep(3000);
+            robot.keyPress(KeyEvent.VK_TAB);
+            robot.keyRelease(KeyEvent.VK_TAB);
+
+//            WebElement fromSelect = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]/div"));
+//            robot.keyPress(KeyEvent.VK_ENTER);
 //            Thread.sleep(3000);
 
-//            WebElement destinyBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]/a/span[1]"));
-//            destinyBTN.click();
-//            destinyBTN.sendKeys("NYC");
-//            Thread.sleep(3000);
+
+            WebElement destinyBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]/a"));
+            destinyBTN.click();
+            destinyBTN.sendKeys("JFK");
+            Thread.sleep(300);
+             robot.keyPress(KeyEvent.VK_ENTER);
+             robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(300);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+
         System.out.println("Start Poszukiwanie lotu ");                                                                  //NUMEROWANIE Z WYŚWIETLENIEM W KONSOLI ZASTOSOWAŁEM DO TEGO ABY SPRAWDZIĆ W KTORYM MOMENCIE KODU MOŻE WYSTĄPIĆ JAKIŚ PROBLEM
-            WebElement departDate = driver.findElement(By.xpath("//*[@id=\"FlightsDateStart\"]"));
-            departDate.click();
+        WebElement departDate = driver.findElement(By.xpath("//*[@id=\"FlightsDateStart\"]"));
+        departDate.click();
         System.out.println("1");
-            WebElement nextMnt_1 = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
-            nextMnt_1.click();
+        Thread.sleep(300);
+
+        WebElement nextMnt_1 = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
+        nextMnt_1.click();
         System.out.println("2");
-            WebElement nextMnt_2 = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
-            nextMnt_2.click();
+        Thread.sleep(300);
+
+        WebElement nextMnt_2 = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
+        nextMnt_2.click();
         System.out.println("3");
-            WebElement dayDep = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div/div[2]/div[27]"));
-            dayDep.click();
+        Thread.sleep(300);
+
+        WebElement dayDep = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div/div[2]/div[27]"));
+        dayDep.click();
         System.out.println("4");
-            WebElement dayDepart = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
-            dayDepart.click();
+        Thread.sleep(300);
+
+        WebElement dayDepart = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[8]/div/div/div[2]/div[34]"));
+        dayDepart.click();
         System.out.println("5");
+        Thread.sleep(300);
 
-            System.out.println("przed przerwaą");
-            Thread.sleep(2000);
-            System.out.println("Po przerwie");
+        WebElement flightSearch = driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[2]/div[4]/button"));
+        flightSearch.click();
+//------------------------------------------------------------------------------------------------------------------------------//
 
-//            robot.keyPress(KeyEvent.VK_ESCAPE);
+//        System.out.println("przed przerwaą");
+//        Thread.sleep(2000);
+//        System.out.println("Po przerwie");
+
+
+
+//        System.out.println("robot wciska ESCAPE");
+//
+//        robot.keyPress(KeyEvent.VK_ESCAPE);
+//        System.out.println("Wciśnęto ESC");
+//        Thread.sleep(300);
+//
+//        System.out.println("6");
+//        Thread.sleep(300);
+//
+//        WebElement K2_select = driver.findElement(By.id("FlightsDateEnd"));
+//        K2_select.click();
+    }
+        @After
+        public void accountLogina()
+        {
+            System.out.println("Koniec @Test");
 //
 //
 //
@@ -217,4 +262,5 @@ public class LogPage
 
 
     }
+
 }

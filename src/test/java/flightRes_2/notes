@@ -26,3 +26,20 @@ z Warszawie do Nowego Jorku w dn. 24.01.2019 - 31.01.2019
 
 
 
+/**
+	 * Metoda robi screenshot ekranu i zapisuje go na dysku
+	 */
+	public void screenCapture() {
+		//pobieramy rozmiar ekranu i tworzymy Rectangle
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+		Rectangle rectangle = new Rectangle(dimension);
+		//robimy screenshot z utworzonego obszaru
+		BufferedImage screen = robot.createScreenCapture(rectangle);
+		try {
+			ImageIO.write(screen, "jpg", new File("screenshot.jpg"));
+		} catch (IOException e) {
+			System.err.println("Błąd zapisu obrazu");
+			e.printStackTrace();
+		}
+	}
+
