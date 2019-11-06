@@ -1,22 +1,23 @@
 package flightRes_2;
 
-import net.bytebuddy.asm.Advice;
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
+import ru.yandex.qatools.ashot.Screenshot;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.Delayed;
+import java.io.File;
 
-public class LogPage
-{
+
+public class LogPage {
+
+
+
+
 
     private WebDriver driver;
     Robot robot = new Robot();
@@ -26,17 +27,23 @@ public class LogPage
     }
 
     @Before
-    public void setUp()
-    {
+    public void setUp() {
         System.out.println("Start programu");
-        System.setProperty("webdriver.chrome.driver","src/main/resources/WebDriver/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/WebDriver/chromedriver");
         driver = new ChromeDriver();
         driver
                 .manage()
                 .window()
                 .maximize();
 
-    }
+      }
+
+
+
+//    Screenshot screenshot = new Asshot().takeScreenshot(driver);
+//        ImageIO.write(screenshot.getImage(), "jpg", new File("src/main/resources/pics/fullimage.jpg"));
+
+
     @Test
     public void accountLogin() throws InterruptedException {
         System.out.println("Start @Test");
@@ -44,6 +51,11 @@ public class LogPage
                 .navigate()
                 .to("https://www.phptravels.net/m-flights");
 
+//        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+//        FileUtils.copyFile(scrFile, new File("src/main/resources/pics/pic.jpg"));
+
+        //TEST ZBUDOWANY W CELU UZUPEŁNIENIA STAŁYCH DANYCH DO KONTA - NIESTETY TECHNICZNIE PRZYCISKK ZAPISANIA DANYCH  !!!NIE DZIAŁA!!!@#
+        //JEST TO      !@#$ STRONA DEMO !@#$%
 //            //V//UDALO SIE OGARNAC KOPIOWANIE XPATH -
 //            WebElement remMeChBx = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[1]/div[1]/form/div[1]/div/div[2]/div/div/div[3]/div/div[3]/label"));
 //            remMeChBx.click();
@@ -100,36 +112,41 @@ public class LogPage
 //        System.out.println("Koniec zmian w arkuszu @Test");
 //------------------------------------------------------------------------------------------------------------------------------//
 //
-//            WebElement emptySpace = driver.findElement((By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/div/div[2]/div")));
+//            WebElement emptySpace = driver.findElement((By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/div/div[2]/div")));      //BYŁA TO PRÓBA KLIKNIĘCIA W JAKIEŚ PUSTE MIEJSCE NA STROIE
+//                                                                                                                                                      W CELU SPRAWDZENIA REAKCJI CZYSCZENIA BŁĘDU W WYŚWIETLANIU SIĘ KALENDARZA.
 //            emptySpace.click();
 //
         WebElement roundFlight = driver.findElement(By.xpath("//*[@id=\"flights\"]/div/div/form/div/div[1]/div[1]/div[2]/label"));
         roundFlight.click();
 
+        Thread.sleep(300);
 
         WebElement fromBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_from\"]/a"));
-            fromBTN.click();
-            fromBTN.sendKeys("WAW");
-            Thread.sleep(2000);
-            robot.keyPress(KeyEvent.VK_TAB);
-            robot.keyRelease(KeyEvent.VK_TAB);
-
+        fromBTN.click();
+        fromBTN.sendKeys("WAW");
+        Thread.sleep(3000);
+        robot.keyPress(KeyEvent.VK_TAB);                                                                                                            /* KAROL -MENTOR WARSZAWA NIE POLECAŁ UŻYWANIA FUNKCJI ROBOTA */
+        robot.keyRelease(KeyEvent.VK_TAB);                                                                                                          /* BARDZO FAJNA BIBLIOTEKA FUNKCJI - TAK MAM ŚWIADOMOŚĆ ŻE UŻYCIE "TAB" MOŻE POWODOWAĆ PROBLEMY  /*
+                                                                                                                                                        /* ALE CZAS NAGLI ;) "LEPSZY BYL BY ENTER"  */
 //            WebElement fromSelect = driver.findElement(By.xpath("//*[@id=\"select2-drop\"]/ul/li[1]/div"));
 //            robot.keyPress(KeyEvent.VK_ENTER);
 //            Thread.sleep(3000);
 
+        /* KOLEJNY RAZ ZASTOSOWAŁEM ROBOTA PONIEWAŻ MIAŁEM JAKIEŚ PROBLEMY Z POPRAWNYM KLIKNIĘCIEM W CELU
+         * ODWIESZENIA DZIALANIA STRONY, A ROBOT WYDAWAŁ SIĘ NA TYLE POPRAWNYM SZALEŃSTWEM DO ZASYMULOWANIA
+         * WKURZONEGO USERA WALĄCEGO W MYSZKĘ I KLAWIATURĘ :)   */
 
-            WebElement destinyBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]/a"));
-            destinyBTN.click();
-            destinyBTN.sendKeys("JFK");
-            Thread.sleep(300);
-             robot.keyPress(KeyEvent.VK_ENTER);
-             robot.keyRelease(KeyEvent.VK_ENTER);
-            Thread.sleep(300);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
+        WebElement destinyBTN = driver.findElement(By.xpath("//*[@id=\"s2id_location_to\"]/a"));
+        destinyBTN.click();
+        destinyBTN.sendKeys("JFK");
+        Thread.sleep(300);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(300);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
 
-        System.out.println("Start Poszukiwanie lotu ");                                                                  //NUMEROWANIE Z WYŚWIETLENIEM W KONSOLI ZASTOSOWAŁEM DO TEGO ABY SPRAWDZIĆ W KTORYM MOMENCIE KODU MOŻE WYSTĄPIĆ JAKIŚ PROBLEM
+        System.out.println("Start Poszukiwanie lotu ");                                                                  //NUMEROWANIE Z WYŚWIETLENIEM W KONSOLI ZASTOSOWAŁEM DO TEGO ABY SPRAWDZIĆ DODATKOWO W  KTORYM MOMENCIE KODU MOŻE WYSTĄPIĆ JAKIŚ PROBLEM
         WebElement departDate = driver.findElement(By.xpath("//*[@id=\"FlightsDateStart\"]"));
         departDate.click();
         System.out.println("1");
@@ -164,7 +181,7 @@ public class LogPage
         reserveFlight.click();
 
 //------------------------------------------------------------------------------------------------------------------------------//
-
+        /* W TEJ SEKCJI PONIŻEJ POJAWIŁO SIĘ SPORO OZNACZEŃ: ID, NAME  ITP, */
 
         WebElement reserveAsGuest = driver.findElement(By.id("guesttab"));
         reserveAsGuest.click();
@@ -194,154 +211,58 @@ public class LogPage
         MyAddressBTN.click();
 
 
+        //PONIŻSZY ZAPIS POWINIEN DZIALAC POPRAWNIE ALE WYSTEPUJE PODKRESLENIE POD "copyFile"
+//        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//        FileUtils.copyFile(scrFile, new File("src/main/resources/pics/pic.png"));
 
-//        WebElement MyCountryBTN = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/a"));
-//        MyCountryBTN.click();
-        WebElement MyCountryText = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]/div/div/input"));
-        MyCountryText.sendKeys("Poland");
-//        robot.keyPress(KeyEvent.VK_TAB);
-//        robot.keyRelease(KeyEvent.VK_TAB);
+
+        Thread.sleep(3000);
+        robot.keyPress(KeyEvent.VK_PRINTSCREEN);
+        robot.keyRelease(KeyEvent.VK_PRINTSCREEN);
+        System.out.println("PROGRAM WYKONAL PRINTSCREEN");
+    }
+        //       ------------------------------------------------------------------------------------------------------------------------------
+        //ZAKLADKA ODPOWIEDZIALNA ZA DANE PLACACEGO  - WYMAGA POPRAWEK
+
+////
+//        WebElement firstNameBILL = driver.findElement(By.xpath("//*[@id=\"name\"]"));
+//        firstNameBILL.sendKeys("Marek");
+//        firstNameBILL.click();
+//
+//
+//        WebElement lastNameBILL = driver.findElement(By.id("surname"));
+//        lastNameBILL.sendKeys("Aureliusz");
+//        lastNameBILL.click();
+//
+//        WebElement mailAdBILL = driver.findElement(By.xpath("//*[@id=\"email\"]"));
+//        mailAdBILL.sendKeys("maurel@gmail.com");
+//        mailAdBILL.click();
+//
+//        WebElement mobilePhoneBILL = driver.findElement(By.id("phone[]"));
+//        mobilePhoneBILL.sendKeys("+48 666 666 666");
+//        mobilePhoneBILL.click();
+//
+//
+//        WebElement dobBILL = driver.findElement(By.id("birthday"));
+//        dobBILL.sendKeys("1984-04-01");
+//        dobBILL.click();
+//
+//        WebElement passPort = driver.findElement(By.id("cardno"));
+//        passPort.sendKeys("DO9549451");
+//        passPort.click();
+//
+//        WebElement passportExp = driver.findElement(By.id("expiration"));
+//        passportExp.sendKeys("2025-01-01");
+//        passportExp.click();
+//
+//        WebElement nationality = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]"));
+//        nationality.click();
  //       ------------------------------------------------------------------------------------------------------------------------------
 
 
-        WebElement firstNameBILL = driver.findElement(By.xpath("//*[@id=\"name\"]"));
-        firstNameBILL.sendKeys("Marek");
-        firstNameBILL.click();
-        
 
-        WebElement lastNameBILL = driver.findElement(By.id("surname"));
-        lastNameBILL.sendKeys("Aureliusz");
-        lastNameBILL.click();
-
-        WebElement mailAdBILL = driver.findElement(By.xpath("//*[@id=\"email\"]"));
-        mailAdBILL.sendKeys("maurel@gmail.com");
-        mailAdBILL.click();
-
-        WebElement mobilePhoneBILL = driver.findElement(By.id("phone[]"));
-        mobilePhoneBILL.sendKeys("+48 666 666 666");
-        mobilePhoneBILL.click();
-
-
-        WebElement dobBILL= driver.findElement(By.id("birthday"));
-        dobBILL.sendKeys("1984-04-01");
-        dobBILL.click();
-
-        WebElement passPort= driver.findElement(By.id("cardno"));
-        passPort.sendKeys("DO9549451");
-        passPort.click();
-
-        WebElement passportExp= driver.findElement(By.id("expiration"));
-        passportExp.sendKeys("2025-01-01");
-        passportExp.click();
-
-        WebElement nationality = driver.findElement(By.xpath("//*[@id=\"guestform\"]/div[5]/div/div[2]"));
-        nationality.click();
-
-//        System.out.println("przed przerwaą");
-//        Thread.sleep(2000);
-//        System.out.println("Po przerwie");
-
-
-
-//        System.out.println("robot wciska ESCAPE");
-//
-//        robot.keyPress(KeyEvent.VK_ESCAPE);
-//        System.out.println("Wciśnęto ESC");
-//        Thread.sleep(300);
-//
-//        System.out.println("6");
-//        Thread.sleep(300);
-//
-//        WebElement K2_select = driver.findElement(By.id("FlightsDateEnd"));
-//        K2_select.click();
+    @After
+    public void accountLogina() {
+        System.out.println("Koniec @Test");
     }
-        @After
-        public void accountLogina()
-        {
-            System.out.println("Koniec @Test");
-//
-//
-//
-//            WebElement emptySpace = driver.findElement((By.xpath("/html/body/div[1]/div[1]/div[1]/div[3]/div/div/div/div/div/div/div[2]/div")));            /*klikniecie w pustą przestrzen*/
-//            emptySpace.click();
-//
-//            WebElement returnDate = driver.findElement(By.xpath("//*[@id=\"airDatepickerRange-flight\"]/div[2]/div/div[2]"));                              /*Ponowny wybór kalendarza */
-//            returnDate.click();
-//            WebElement dayRetu = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div/div[2]/div[34]"));                          /*Wybór dnia*/
-//            dayRetu.click();
-//
-//            Robot presESC = robot;
-//                    robot.keyPress(KeyEvent.VK_ESCAPE);
-
-            //    jeżeli tekst miesiąca kalendarza Kal_2    == nazwa miesiaca K_1
-
-//        import java.awt.Robot;
-//import java.awt.event.KeyEvent;
-//
-//        Robot robot = new Robot();
-//        robot.keyPress(KeyEvent.VK_ESCAPE);
-//        robot.keyRelease(KeyEvent.VK_ESCAPE);
-
-
-
-//          WebElement returnDate = driver.findElement(By.xpath("//*[@id=\"airDatepickerRange-flight\"]/div[2]/div/div[2]"));
-//          returnDate.click();
-//            WebElement nextMnt_1 =driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
-//            nextMnt_1.click();
-//            WebElement nextMnt_2 =driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]"));
-//            nextMnt_2.click();
-
-
-//            departDate.sendKeys("2020-01-21");
-//            WebElement yearSel = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/div/div[3]/div/div[12]"));
-//            yearSel.click();
-
-
-
-
-
-
-//            String month = "December 2019";
-////            String day = "5";
-//
-//            while (true)
-//            {
-//                String text = driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav")).getText();
-//                if(text.equals(month))
-//                {
-//                    break;
-//                }
-//
-//                else
-//                {
-//                    driver.findElement(By.xpath("//*[@id=\"datepickers-container\"]/div[7]/nav/div[3]/svg/path")).click();
-//                }
-//            }
-
-
-
-
-
-    //        WebElement CountrySel = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/form/div/div/div[4]/div[2]/div/div[2]"));
-    //        CountrySel.isEnabled();
-
-
-    //        WebElement CountryText = driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div[1]/div[2]/div/div[2]/div/div/div/div/div/div/form/div/div/div[4]/div[2]/div/div[2]/div/div/input"));
-    //        CountryText.sendKeys("Poland");
-    //
-    //        driver.findElement(By.xpath("//*[@id=\"profilefrm\"]/div/div/div[4]/div[2]/div/div[2]/div/ul/li[2]/em"));
-    //        CountryTextClick.isSelected();
-
-
-
-
-
-    //V// Działa wyszukiwanie po text ale znalazło inny Login niż potrzeba ;)
-    //        WebElement LoginBTN = driver.findElement(By.linkText("Login"));
-    //        LoginBTN.click();
-
-
-
-    }
-
 }

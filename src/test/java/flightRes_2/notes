@@ -43,3 +43,6 @@ z Warszawie do Nowego Jorku w dn. 24.01.2019 - 31.01.2019
 		}
 	}
 
+
+        File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(scrFile, new File("src/main/resources/pics/pic.jpg"));
